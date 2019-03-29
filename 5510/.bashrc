@@ -40,7 +40,7 @@ done;
 #################################################
 
 BROWSER=/usr/bin/firefox
-EDITOR=/usr/bin/vim
+EDITOR=/usr/bin/nvim
 
 export GOPATH=/home/jeremybr/dev
 export PATH="$HOME/.local/bin:$HOME/bin:$GOPATH/bin:$PATH";
@@ -52,7 +52,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$GOPATH/bin:$PATH";
 alias ls='ls --color=auto'
 alias yim="vim +'set ft=yaml' -"
 alias pbcopy="xclip -sel clip"
-
+alias oldvim="\vim"
+alias vim="nvim"
 
 # keybindings
 
