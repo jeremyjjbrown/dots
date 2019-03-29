@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This only works with nvim and https://github.com/mhinz/neovim-remote installed.
+# It can work with vim that is compiled with +clientserver and replaceing nvr with vim.
+
 has_display() {
     [[ -n "$DISPLAY" ]]
 }
@@ -7,9 +10,15 @@ has_display() {
 main() {
     if has_display; then
         ln -sf "$HOME/.vim/light.vim" "$HOME/.vim/lightOrDark.vim"
-        ln -sf ~/.config/termite/light ~/.config/termite/config
+        for s in $(nvr --serverlist)
+        do
+            nvr --servername $s --remote-send '<Esc>:source ${HOME}/.config/nvim/init.vim<CR>'
+        done
+
+        ln -sf "$HOME/.config/termite/light" "$HOME/.config/termite/config"
         killall -USR1 termite
-        ln -sf  /home/jeremybr/.config/i3/light /home/jeremybr/.config/i3/config
+
+        ln -sf  "$HOME/.config/i3/light" "$HOME/.config/i3/config"
         i3-msg restart
     fi
 }
