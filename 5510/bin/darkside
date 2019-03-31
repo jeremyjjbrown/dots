@@ -9,17 +9,18 @@ has_display() {
 }
 
 main() {
-	if has_display; then
-		ln -sf "$HOME/.vim/dark.vim" "$HOME/.vim/lightOrDark.vim"
+    if has_display; then
+        ln -sf "$HOME/.vim/dark.vim" "$HOME/.vim/lightOrDark.vim"
         for s in $(nvr --serverlist)
         do
             nvr --servername $s --remote-send '<Esc>:source $HOME/.config/nvim/init.vim<CR>'
         done
-		ln -sf "$HOME/.config/termite/dark" "$HOME/.config/termite/config"
-		killall -USR1 termite
-        ln -sf  "$HOME/.config/i3/dark" "$HOME/.config/i3/config"
+        ln -sf "$HOME/.config/termite/dark" "$HOME/.config/termite/config"
+        killall -USR1 termite
+
+        cat "$HOME/.config/i3/base" "$HOME/.config/i3/dark" > "$HOME/.config/i3/config"
         i3-msg restart
-	fi
+    fi
 }
 
 main

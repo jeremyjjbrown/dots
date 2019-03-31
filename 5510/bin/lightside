@@ -18,7 +18,7 @@ main() {
         ln -sf "$HOME/.config/termite/light" "$HOME/.config/termite/config"
         killall -USR1 termite
 
-        ln -sf  "$HOME/.config/i3/light" "$HOME/.config/i3/config"
+        cat "$HOME/.config/i3/base" "$HOME/.config/i3/light" > "$HOME/.config/i3/config"
         i3-msg restart
     fi
 }
