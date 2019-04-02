@@ -28,7 +28,8 @@ exec --no-startup-id exec /usr/bin/xmodmap -e 'clear Lock' -e 'keycode 0x42 = Es
 
 ### Personal configs
 # wallpaper
-exec --no-startup-id exec feh --bg-scale /home/jeremybr/.config/i3/solarized-wallpaper-arch.png
+# exec --no-startup-id exec feh --bg-scale /home/jeremybr/.config/i3/solarized-wallpaper-arch.png
+exec --no-startup-id nitrogen --restore
 
 # compositor
 # exec --no-startup-id exec compton -CGb
@@ -49,8 +50,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+# Save these for no xfce, which handles them for now.
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Screen lock
 bindsym $mod+Control+l exec $HOME/.config/i3/i3lock.sh

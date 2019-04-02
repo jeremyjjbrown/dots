@@ -37,7 +37,7 @@ exec --no-startup-id exec feh --bg-scale /home/jeremybr/.config/i3/solarized-wal
 exec --no-startup-id exec copyq &
 
 # gaps
-gaps inner 15
+gaps inner 20
 gaps outer 0
 
 # see symbols  `xmodmap -pke`
@@ -49,14 +49,15 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+# Save these for no xfce, which handles them for now.
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Screen lock
-# bindsym $mod+Control+l exec $HOME/.config/i3/i3lock.sh
+bindsym $mod+Control+l exec $HOME/.config/i3/i3lock.sh
 
 # Sleep
-# bindsym $mod+Control+s exec --no-startup-id "$HOME/.config/i3/i3lock.sh && sleep 0.5 && sudo /usr/bin/pm-suspend"
+bindsym $mod+Control+s exec --no-startup-id "$HOME/.config/i3/i3lock.sh && sleep 0.5 && sudo /usr/bin/pm-suspend"
 
 # Floated
 # not sure this is doing anything
@@ -66,56 +67,14 @@ for_window [class="Copyq"] floating enable, border pixel 1
 # Bar toggle, hide or show
 # bindsym $mod+b bar mode toggle
 
-## Colors
-# class                 border  backgr.   text    indicator
-# client.focused          #888888 $arcblack #ffffff #fe840e
-# client.focused_inactive #444444 #555a63   #cccccc #48504e
-# client.unfocused        #444444 #1e180f   #888888 #292e2d
-# client.urgent           #dddddd #d00000   #ffffff #900000
-client.placeholder      #000000 #0c0c0c   #ffffff #000000
-client.background       #888888
-
-
-# Status bar
-
-# medium tones to go with both solorized light and dark
-bar {
-    status_command i3status -c /home/jeremybr/.config/i3/i3status.conf
-    position bottom
-    font pango:Hack, FontAwesome 14
-    tray_padding 2
-    separator_symbol "  |  "
-    colors {
-        background #eee8d5
-        statusline #073642
-        separator  #586e75
-        focused_workspace  #b58900 #b58900 #002b36
-        active_workspace   #586e75 #586e75 #002b36
-        inactive_workspace #073642 #002b36 #839496
-        urgent_workspace   #dc322f #dc322f #fdf6e3
-    }
-}
-
-client.focused          #002b36 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #002b36 #073642 #839496 #073642
-client.unfocused        #002b36 #073642 #839496 #073642
-client.urgent #002b36 #dc322f #fdf6e3 #002b36
-
 
 # hide_edge_borders
 for_window [class="^.*"] border pixel 0
 
 
-######################################################################
-# Org configs
-
-# i3 config file (v4)
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+# Font for window titles.
 font Hack 10
 
 
@@ -125,7 +84,7 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec termite
 bindsym $mod+Shift+b exec --no-startup-id firefox
-bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f ~/Pictures/'
+bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f ~/screenshots/'
 # bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f ~/OneDrive/Screenshots/'
 # bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
 # bindsym $mod+Shift+a exec scrext'
@@ -137,10 +96,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'sans-16'"
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -149,10 +108,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -161,7 +120,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+o split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -240,4 +199,35 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# exec --no-startup-id conky
+# Light Colors
+
+# class                 border  backgr.   text    indicator
+# client.focused          #888888 $arcblack #ffffff #fe840e
+# client.focused_inactive #444444 #555a63   #cccccc #48504e
+# client.unfocused        #444444 #1e180f   #888888 #292e2d
+# client.urgent           #dddddd #d00000   #ffffff #900000
+client.placeholder      #000000 #0c0c0c   #ffffff #000000
+client.background       #888888
+
+# Status bar
+bar {
+    status_command i3status -c /home/jeremybr/.config/i3/i3status.conf
+    position bottom
+    font pango:Hack, FontAwesome 14
+    tray_padding 2
+    separator_symbol "  |  "
+    colors {
+        background #eee8d5
+        statusline #073642
+        separator  #586e75
+        focused_workspace  #b58900 #b58900 #002b36
+        active_workspace   #586e75 #586e75 #002b36
+        inactive_workspace #073642 #002b36 #839496
+        urgent_workspace   #dc322f #dc322f #fdf6e3
+    }
+}
+
+client.focused          #002b36 #586e75 #fdf6e3 #268bd2
+client.focused_inactive #002b36 #073642 #839496 #073642
+client.unfocused        #002b36 #073642 #839496 #073642
+client.urgent #002b36 #dc322f #fdf6e3 #002b36
