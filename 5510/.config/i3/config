@@ -1,18 +1,4 @@
 
-# Colors
-
-set $black        #282828
-set $darkblack    #1d2021
-set $darkwhite    #ffffff
-set $whitesmoke   #f5f5f5
-set $skyblue      #3399ff
-set $green        #42b879
-set $darkred      #8b0000
-set $darkgray     #414141
-set $lightgray    #D3D3D3
-set $transparent  #000000E5
-set $arcDarkGrey     #2F343F
-
 # set HiDPI (5510 only)
 exec xrandr --dpi 282
 
@@ -28,7 +14,8 @@ exec --no-startup-id exec /usr/bin/xmodmap -e 'clear Lock' -e 'keycode 0x42 = Es
 
 ### Personal configs
 # wallpaper
-exec --no-startup-id exec feh --bg-scale /home/jeremybr/.config/i3/solarized-wallpaper-arch.png
+# exec --no-startup-id exec feh --bg-scale /home/jeremybr/.config/i3/solarized-wallpaper-arch.png
+exec --no-startup-id nitrogen --restore
 
 # compositor
 # exec --no-startup-id exec compton -CGb
@@ -54,10 +41,11 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Screen lock
-bindsym $mod+Control+l exec $HOME/.config/i3/i3lock.sh
+bindsym $mod+Control+l exec $HOME/bin/i3lock.sh
+exec xautolock -time 15 -locker '$HOME/bin/i3lock.sh' &
 
 # Sleep
-bindsym $mod+Control+s exec --no-startup-id "$HOME/.config/i3/i3lock.sh && sleep 0.5 && sudo /usr/bin/pm-suspend"
+bindsym $mod+Control+s exec --no-startup-id "$HOME/bin/i3lock.sh && sleep 0.5 && sudo /usr/bin/pm-suspend"
 
 # Floated
 # not sure this is doing anything
@@ -69,7 +57,7 @@ for_window [class="Copyq"] floating enable, border pixel 1
 
 
 # hide_edge_borders
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 5
 
 
 set $mod Mod1
@@ -201,6 +189,25 @@ bindsym $mod+r mode "resize"
 
 # Light Colors
 
+# Solarized Colors
+
+set $base03     #002b36
+set $base02     #073642
+set $base01     #586e75
+set $base00     #657b83
+set $base0      #839496
+set $base1      #93a1a1
+set $base2      #eee8d5
+set $base3      #fdf6e3
+set $yellow     #b58900
+set $orange     #cb4b16
+set $red        #dc322f
+set $magenta    #d33682
+set $violet     #6c71c4
+set $blue       #268bd2
+set $cyan       #2aa198
+set $green      #859900
+
 # class                 border  backgr.   text    indicator
 # client.focused          #888888 $arcblack #ffffff #fe840e
 # client.focused_inactive #444444 #555a63   #cccccc #48504e
@@ -227,7 +234,8 @@ bar {
     }
 }
 
-client.focused          #002b36 #586e75 #fdf6e3 #268bd2
-client.focused_inactive #002b36 #073642 #839496 #073642
-client.unfocused        #002b36 #073642 #839496 #073642
-client.urgent #002b36 #dc322f #fdf6e3 #002b36
+# class                 border  background  text    indicator child_border
+client.focused          $blue   #586e75     #fdf6e3 $blue     $blue
+client.focused_inactive #002b36 #073642     #839496 #073642
+client.unfocused        #002b36 #073642     #839496 #073642
+client.urgent           $red    #dc322f     #fdf6e3 #002b36
