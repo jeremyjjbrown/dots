@@ -39,8 +39,10 @@ done;
 # Envs
 #################################################
 
-BROWSER=/usr/bin/firefox
-EDITOR=/usr/bin/nvim
+export BROWSER=/usr/bin/firefox
+export VISUAL=nvim
+export EDITOR=nvim
+
 
 export GOPATH=/home/jeremybr/dev
 export PATH="$HOME/.local/bin:$HOME/bin:$GOPATH/bin:$PATH";
@@ -54,6 +56,9 @@ alias yim="vim +'set ft=yaml' -"
 alias pbcopy="xclip -sel clip"
 alias oldvim="\vim"
 alias vim="nvim"
+alias proxy-notebooks='ssh -L 8888:localhost:8888 lake'
+
+
 
 # keybindings
 
@@ -76,3 +81,39 @@ source ~/.bash_prompt
 # https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
 export FZF_DEFAULT_OPTS="--bind 'ctrl-y:execute( echo  {} | xclip -r -sel clip )+abort'"
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+
+# added by Anaconda2 2018.12 installer
+# # >>> conda init >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/jeremybr/anaconda2/bin/conda' shell.bash hook 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     \eval "$__conda_setup"
+# else
+#     if [ -f "/home/jeremybr/anaconda2/etc/profile.d/conda.sh" ]; then
+#         . "/home/jeremybr/anaconda2/etc/profile.d/conda.sh"
+#         CONDA_CHANGEPS1=false conda activate base
+#     else
+#         \export PATH="/home/jeremybr/anaconda2/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda init <<<
+# export PATH="$PATH:/home/jeremybr/anaconda3/bin"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/jeremybr/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/jeremybr/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/jeremybr/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/jeremybr/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+
