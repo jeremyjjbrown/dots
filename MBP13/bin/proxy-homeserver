@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh -L 8112:localhost:8112 -L 8096:localhost:8096 home

@@ -1,0 +1,46 @@
+#!/usr/bin/env python2
+
+# -*- coding: utf-8 -*-
+import json
+import logging
+import sys
+import requests
+
+
+def main():
+    """ Get a list of tags for all images in a specific repository.
+
+    :arg repository_name: name of the repo to query IE here/centos
+    """
+    repository_name = sys.argv[1]
+    registry_url = "docker.sdp.in.here.com"
+    auth_url = 'https://%s/auth?service=%s&scope=repository:%s:pull' % (
+       registry_url, registry_url, repository_name)
+    logging.debug("Requesting token from: %s", auth_url)
+    response = requests.get(auth_url)
+    token = ''
+    if response.status_code == 200:
+        token = response.json().get('token')
+        logging.debug('Docker Registry token for https://%s/%s is %s',
+                      registry_url, repository_name, token)
+    url = 'https://%s/v2/%s/tags/list' % (registry_url, repository_name)
+    headers = {'Authorization': 'Bearer %s' % token}
+    logging.debug("Request Url: %s HTTP Headers: %s" % (url, str(headers)))
+    curl = "curl -H %s %s" % (headers, url)
+    print curl
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        logging.critical("List images for repository % returned: %s",
+                         repository_name, response.status_code)
+        print "No image tags where found for repository: %s" % repository_name
+    else:
+        logging.debug('Docker Registry query to %s returned %s', url,
+                      response.text)
+        for tag in response.json().get('tags'):
+            print tag
+
+
+if __name__ == '__main__':
+    logging.getLogger('requests').setLevel(logging.CRITICAL)
+    logging.basicConfig(level=logging.INFO)
+    main()

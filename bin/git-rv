@@ -1,0 +1,4 @@
+#!/bin/sh
+
+result=$(git review -l | grep -Ev 'Found [0-9]+ items for review' | fzf | cut -d' ' -f1)
+[ -n "$result" ] && git review -d "$result"

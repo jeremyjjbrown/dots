@@ -1,0 +1,13 @@
+#!/usr/bin/env python2
+# coding: utf-8
+
+import sys
+
+
+def calc_diopters(edge_of_blur_inches):
+    value = ((100 / (edge_of_blur_inches * 2.54)) / -0.25) * 0.25
+    return round(value * 4) / 4
+
+
+inches = float(sys.argv[1])
+print(calc_diopters(inches))

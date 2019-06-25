@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import configparser
+import os
+
+
+def get_profile_credentials(profile_name):
+
+    config = configparser.ConfigParser()
+    config.read(["/".join((os.path.expanduser("~"), '.aws/credentials'))])
+    aws_access_key_id = config.get(profile_name, 'aws_access_key_id')
+    aws_secret_access_key = config.get(profile_name, 'aws_secret_access_key')
+    return aws_access_key_id, aws_secret_access_key
+
+
+def main():
+    id, key = get_profile_credentials("default")
+    print(
+        'export AWS_ACCESS_KEY_ID="{}" && export AWS_SECRET_ACCESS_KEY="{}"'.format(id, key)
+    )
+
+
+if __name__ == "__main__":
+    main()

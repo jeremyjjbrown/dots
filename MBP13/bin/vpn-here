@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -xe
+
+# server Ali shared   access.here.com.glb.as1248.net
+# other server 204.120.70.12 131.228.182.4
+
+# To get the vip token use `VIPAccess.exp v` with vip registered on MacOS and
+# take the OTP key
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    networksetup -setdnsservers Wi-Fi 192.168.80.253 8.8.8.8 8.8.4.4
+    networksetup -setsearchdomains Wi-Fi ad.navteq.com in.here.com
+fi
+
+VIP_TOKEN=$(cat $HOME/.ssh/vip_token)
+echo "VIP_TOKEN=${VIP_TOKEN}"
+VIP_PIN=$(cat $HOME/.ssh/vip_pin)
+echo "VIP_PIN=${VIP_PIN}"
+VIP="$VIP_PIN$(oathtool --totp $VIP_TOKEN)"
+echo "VIP=${VIP}"
+VPN_SERVER='access.here.com'
+USER='jeremybr'
+
+if [[ $* == *--all* ]]; then
+    GROUP='HERE-Tunnel-All'
+else
+    GROUP='HERE-AnyConnect-VIPToken'
+fi
+
+echo "connecting to profile $GROUP"
+# openconnect --juniper --user=$USER --authgroup="$GROUP" $VPN_SERVER <<< $VIP
+openconnect --user=$USER --authgroup="$GROUP" $VPN_SERVER <<< $VIP

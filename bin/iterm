@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# OSX only
+[ `uname -s` != "Darwin" ] && return
+
+osascript &>/dev/null <<EOF
+    tell application "iTerm2"
+        set newWindow to (create window with default profile)
+        tell current session of newWindow
+            delay 1
+            write text "clear"
+        end tell
+    end tell
+EOF
