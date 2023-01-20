@@ -1,3 +1,8 @@
+if exists('g:vscode')
+    " VSCode extension
+else
+
+" ordinary vim
 set nocompatible
 filetype off
 
@@ -5,29 +10,47 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'ajh17/VimCompletesMe'
+Plugin 'Yggdroot/LeaderF'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'avakhov/vim-yaml'
 Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
-Plugin 'janko-m/vim-test'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'junegunn/fzf.vim'
+Plugin 'mkitt/tabline.vim'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'ojroques/vim-oscyank'
+Plugin 'puremourning/vimspector'
 Plugin 'python-mode/python-mode'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-markdown'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'w0rp/ale'
+Plugin 'chrisbra/recover.vim'
+Plugin 'unblevable/quick-scope'
+Plugin 'davidhalter/jedi-vim'
+
 
 call vundle#end()
 
 filetype plugin indent on
 syntax on
 
-source /home/jeremybr/.vim/lightOrDark.vim
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+" packadd! vimspector
+
+" source /home/jeremybr/.vim/lightOrDark.vim
 colorscheme solarized
+"autocmd vimenter * ++nested colorscheme gruvbox
+"set termguicolors
+
+" LeaderF confs
+let g:Lf_PopupColorscheme = 'gruvbox_material'
+hi link Lf_hl_cursorline None
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_UseCache = 0
+let g:Lf_UseMemoryCache = 0
 
 set nofoldenable
 set backspace=indent,eol,start
@@ -62,6 +85,8 @@ set showcmd
 set splitbelow
 set splitright
 set tabstop=4
+let g:netrw_liststyle = 3
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'yaml']
 
 nnoremap <C-Down> <C-W><C-J>
 nnoremap <C-H> <C-W><C-H>
@@ -72,12 +97,12 @@ nnoremap <C-Left> <C-W><C-H>
 nnoremap <C-Right> <C-W><C-L>
 nnoremap <C-Up> <C-W><C-K>
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nnoremap <c-\> :OSCYank<CR>
 
 autocmd BufWritePre * %s/\s\+$//e
 
-let NERDTreeIgnore=['\.DS_Store$','.idea$']
+let g:NERDCompactSexyComDTreeIgnore=['\.DS_Store$','.idea$']
 let NERDTreeShowHidden=1
-let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDSpaceDelims = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -95,3 +120,7 @@ if has('unix')
     let &t_EI = "\<Esc>[2 q"
   endif
 endif
+
+endif
+
+

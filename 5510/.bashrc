@@ -1,8 +1,4 @@
-#
 # ~/.bashrc
-#
-
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -11,7 +7,10 @@ export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
-#export PROMPT_COMMAND="history -a; history -c; history -r $PROMPT_COMMAND"
+
+# force history update
+shopt -s histappend
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 ###############################################
 # bash options
@@ -33,15 +32,16 @@ for option in autocd globstar; do
 done;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
+# [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
 
 #################################################
 # Envs
 #################################################
 
-export BROWSER=/usr/bin/firefox
-export VISUAL=nvim
-export EDITOR=nvim
+# export BROWSER=/usr/bin/firefox
+export VISUAL=vim
+export EDITOR=vim
+
 
 
 export GOPATH=/home/jeremybr/dev
@@ -54,16 +54,6 @@ export PATH="$HOME/.local/bin:$HOME/bin:$GOPATH/bin:$PATH";
 alias ls='ls --color=auto'
 alias yim="vim +'set ft=yaml' -"
 alias pbcopy="xclip -sel clip"
-alias oldvim="\vim"
-alias vim="nvim"
-alias proxy-notebooks='ssh -L 8888:localhost:8888 lake'
-
-
-
-# keybindings
-
-xmodmap ~/.xmodmap
-xcape -e 'Mode_switch=Escape'
 
 #################################################
 # Prompt is best at the end
@@ -83,37 +73,8 @@ export FZF_DEFAULT_OPTS="--bind 'ctrl-y:execute( echo  {} | xclip -r -sel clip )
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 
 
-# added by Anaconda2 2018.12 installer
-# # >>> conda init >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/jeremybr/anaconda2/bin/conda' shell.bash hook 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     \eval "$__conda_setup"
-# else
-#     if [ -f "/home/jeremybr/anaconda2/etc/profile.d/conda.sh" ]; then
-#         . "/home/jeremybr/anaconda2/etc/profile.d/conda.sh"
-#         CONDA_CHANGEPS1=false conda activate base
-#     else
-#         \export PATH="/home/jeremybr/anaconda2/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda init <<<
-# export PATH="$PATH:/home/jeremybr/anaconda3/bin"
+# update xmodmap
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/jeremybr/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/jeremybr/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/jeremybr/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/jeremybr/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-
+xmodmap ~/.xmodmap
+xcape -e 'Mode_switch=Escape'
+# xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
