@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/jeremybr'
+let g:netrw_dirhist_2='/home/jeremybr/dev/src/gerrit.it.here.com/3dds/arch/nearmap'
+let g:netrw_dirhist_3='/home/jeremybr/dev/src/gerrit.it.here.com/3dds/arch/nearmap/service'
+let g:netrw_dirhist_4='/home/jeremybr/dev/src/gerrit.it.here.com/3dds/arch/nearmap/util'
+let g:netrw_dirhist_5='/home/jeremybr/dev/src/gerrit.it.here.com/3dds/arch/nearmap'
+let g:netrw_dirhist_6='/home/jeremybr/dev/src/gerrit.it.here.com/3dds/arch/nearmap/files'

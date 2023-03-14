@@ -8,19 +8,26 @@ has_display() {
 }
 
 main() {
-    if has_display; then
-        ln -sf "$HOME/.vim/light.vim" "$HOME/.vim/lightOrDark.vim"
-        for s in $(nvr --serverlist)
-        do
-            nvr --servername $s --remote-send '<Esc>:source ${HOME}/.config/nvim/init.vim<CR>'
-        done
-
-        ln -sf "$HOME/.config/termite/light" "$HOME/.config/termite/config"
-        killall -USR1 termite
-
-        cat "$HOME/.config/i3/base" "$HOME/.config/i3/light" > "$HOME/.config/i3/config"
-        i3-msg restart
-    fi
+    xfconf-query -c xsettings -p /Net/ThemeName -s "NumixSolarizedLightCyan"
+    sed -i "s/colors: \*solarized\_.*/colors: \*solarized_light/g" \
+        $HOME/.config/alacritty/alacritty.yml
 }
+
+# main() {
+    # if has_display; then
+    #     ln -sf "$HOME/.vim/light.vim" "$HOME/.vim/lightOrDark.vim"
+    #     for s in $(nvr --serverlist)
+    #     do
+    #         NVIM_LISTEN_ADDRESS=$s nvr --servername $s \
+    #             --remote-send '<Esc>:source ${HOME}/.config/nvim/init.vim<CR>'
+    #     done
+
+    #     ln -sf "$HOME/.config/termite/light" "$HOME/.config/termite/config"
+    #     killall -USR1 termite
+
+    #     cat "$HOME/.config/i3/base" "$HOME/.config/i3/light" > "$HOME/.config/i3/config"
+    #     i3-msg restart
+    # fi
+# }
 
 main

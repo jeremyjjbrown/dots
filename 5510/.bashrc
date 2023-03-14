@@ -10,7 +10,6 @@ shopt -s histappend                      # append to history, don't overwrite it
 
 # force history update
 shopt -s histappend
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 ###############################################
 # bash options
@@ -24,15 +23,8 @@ shopt -s histappend;
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
-# Enable some Bash 4 features when possible:
-# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
-# * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null;
-done;
-
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-# [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
 
 #################################################
 # Envs
@@ -43,8 +35,7 @@ export VISUAL=vim
 export EDITOR=vim
 
 
-
-export GOPATH=/home/jeremybr/dev
+# export GOPATH=$HOME/dev
 export PATH="$HOME/.local/bin:$HOME/bin:$GOPATH/bin:$PATH";
 
 #################################################
@@ -54,6 +45,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$GOPATH/bin:$PATH";
 alias ls='ls --color=auto'
 alias yim="vim +'set ft=yaml' -"
 alias pbcopy="xclip -sel clip"
+alias virsh="virsh -c qemu:///system"
+
 
 #################################################
 # Prompt is best at the end

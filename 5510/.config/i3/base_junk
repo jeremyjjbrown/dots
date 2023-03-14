@@ -9,28 +9,23 @@ exec --no-startup-id exec /usr/bin/xmodmap -e 'clear Lock' -e 'keycode 0x42 = Es
 # exec --no-startup-id xinput set-prop "SynPS/2 Synaptics Touchpad" "Device Enabled" 0
 # exec --no-startup-id xinput set-prop "DLL06E5:01 06CB:7A13 Touchpad"  "Synaptics Tap Time" 0
 
-# daemons
-exec --no-startup-id exec mate-settings-daemon
-exec --no-startup-id exec mate-screensaver
-exec --no-startup-id exec mate-power-manager
-exec --no-startup-id exec nm-applet -sm-disable
-exec --no-startup-id polybar.sh &
-# exec --no-startup-id polybar &
+# network manager
+# exec --no-startup-id nm-applet -sm-disable
+
+### Personal configs
+# wallpaper
+# exec --no-startup-id exec feh --bg-scale /home/jeremybr/.config/i3/solarized-wallpaper-arch.png
 exec --no-startup-id nitrogen --restore
 
 # compositor
 # exec --no-startup-id exec compton -CGb
-exec --no-startup-id exec /bin/picom
 
 # copyq
-# exec --no-startup-id exec copyq2x &
 exec --no-startup-id exec copyq &
 exec --no-startup-id exec flameshot &
-# exec --no-startup-id exec volumeicon &
-exec --no-startup-id exec pasystray &
 
 # gaps
-gaps inner 12
+gaps inner 20
 gaps outer 0
 
 # see symbols  `xmodmap -pke`
@@ -57,61 +52,43 @@ bindsym $mod+Control+s exec --no-startup-id "$HOME/bin/i3lock.sh && sleep 0.5 &&
 # not sure this is doing anything
 for_window [class="Copyq"] floating enable, border pixel 1
 
-# Try to make zoom not a PITA
-for_window [window_role="pop-up"]                       floating enable
-for_window [window_role="bubble"]                       floating enable
-for_window [window_role="task_dialog"]                  floating enable
-for_window [window_role="Preferences"]                  floating enable
-for_window [window_type="dialog"]                       floating enable
-for_window [window_type="menu"]                         floating enable
-
 
 # Bar toggle, hide or show
 # bindsym $mod+b bar mode toggle
-bindsym $mod+b exec --no-startup-id polybar-msg cmd toggle
+
 
 # hide_edge_borders
-default_border pixel 5
-default_floating_border pixel 5
+for_window [class="^.*"] border pixel 5
 
-# hide the tab/stack bar
-font pango:Hack, FontAwesome 0
 
 set $mod Mod1
+
+# Font for window titles.
+font Hack 10
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec termite
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec termite
 bindsym $mod+Shift+b exec --no-startup-id firefox
-bindsym $mod+Shift+g exec --no-startup-id gather-all
-# bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f ~/Dropbox/screenshots/'
-bindsym --release $mod+Shift+s exec flameshot gui
+bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f ~/Dropbox/screenshots/'
+# bindsym --release $mod+Shift+s exec scrot -s -e 'mv $f ~/OneDrive/Screenshots/'
+# bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+# bindsym $mod+Shift+a exec scrext'
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run -font "hack 18" -fg "#505050" -bg "#000000" -hlfg "#ffb964" -hlbg "#000000" -width 30 -lines 5 -padding 20 -separator-style none -hide-scrollbar -bw 4 -bc "#111111" -run-list-command #rofi-list-directories
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'sans-16'"
-# bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'sans-16'"
-#bindsym $mod+r exec "rofi -modi window,drun,run -show drun -sidebar-mode -terminal termite -color-window '#000000, #000000, #000000' -color-normal '#000000, #b3e774, #000000, #b3e774, #000000' -color-active '#000000, #b3e774, #000000, #b3e774, #000000' -color-urgent '#000000, #b3e774, #000000, #b3e774, #000000'"
-bindsym $mod+space exec rofi -show run -font "hack 18" -fg "#505050" -bg "#000000" -hlfg "#ffb964" -hlbg "#000000" -width 30 -lines 5 -padding 20 -separator-style none -hide-scrollbar -bw 4 -bc "#111111" -run-list-command #rofi-list-directories
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'sans-16'"
 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# change focus match amythest settings
-bindsym $mod+Shift+Left focus left
-bindsym $mod+Shift+Down focus down
-bindsym $mod+Shift+Up focus up
-bindsym $mod+Shift+Right focus right
-
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -126,13 +103,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-# bindsym $mod+Shift+Left move left
-# bindsym $mod+Shift+Down move down
-# bindsym $mod+Shift+Up move up
-# bindsym $mod+Shift+Right move right
-
-# move workspace to screen
-bindsym $mod+m move workspace to output left
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+o split h
@@ -152,13 +126,10 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# skippy-xd for expose/mission control like view
-bindsym $mod+c exec --no-startup-id skippy-xd; exec notify-send "Exposé"
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -184,16 +155,12 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-#collect all windows
-
 # reload the configuration file
-# bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -221,59 +188,3 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Light Colors
-
-# Solarized Colors
-
-set $base03     #002b36
-set $base02     #073642
-set $base01     #586e75
-set $base00     #657b83
-set $base0      #839496
-set $base1      #93a1a1
-set $base2      #eee8d5
-set $base3      #fdf6e3
-set $yellow     #b58900
-set $orange     #cb4b16
-set $red        #dc322f
-set $magenta    #d33682
-set $violet     #6c71c4
-set $blue       #268bd2
-set $cyan       #2aa198
-set $green      #859900
-
-# class                 border  backgr.   text    indicator
-# client.focused          #888888 $arcblack #ffffff #fe840e
-# client.focused_inactive #444444 #555a63   #cccccc #48504e
-# client.unfocused        #444444 #1e180f   #888888 #292e2d
-# client.urgent           #dddddd #d00000   #ffffff #900000
-client.placeholder      #000000 #0c0c0c   #ffffff #000000
-client.background       #888888
-
-# Status bar
-# bar {
-    # # status_command py3status -c ~/.config/i3/i3status.conf
-    # status_command i3status -c ~/.config/i3/i3status.conf
-    # # tray_output primary
-    # position bottom
-    # font pango:Hack, FontAwesome 16
-    # tray_padding 1
-    # separator_symbol "  |  "
-    # colors {
-    #     background $base02
-    #     statusline #268bd2
-    #     separator  #586e75
-    #     focused_workspace  #b58900 #b58900 #002b36
-    #     active_workspace   #586e75 #586e75 #002b36
-    #     inactive_workspace #073642 #002b36 #839496
-    #     urgent_workspace   #dc322f #dc322f #fdf6e3
-    # }
-# }
-
-
-
-# class                 border  background  text    indicator child_border
-client.focused          $blue   #586e75     #fdf6e3 $blue     $blue
-client.focused_inactive #002b36 #073642     #839496 #073642
-client.unfocused        #002b36 #073642     #839496 #073642
-client.urgent           $red    #dc322f     #fdf6e3 #002b36

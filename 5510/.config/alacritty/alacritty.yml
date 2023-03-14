@@ -1,14 +1,14 @@
 font:
   normal:
-    family: 'Monospace'
+    family: 'Hack'
     style: Regular
-  size: 18
+  size: 9
     # when no xfce  size: 12.0
 
 window:
   padding:
-    x: 15
-    y: 15
+    x: 10
+    y: 10
 
 schemes:
   afterglow: &afterglow
@@ -987,5 +987,7 @@ schemes:
       cyan:    '0x89b482'
       white:   '0xdfbf8e'
 
-colors: *solarized_light
+# colors: *solarized_dark
+colors: *solarized_dark
+
 

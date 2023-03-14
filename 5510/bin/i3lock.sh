@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 icon="$HOME/.config/i3/icon.png"
-tmpbg='/tmp/screen.png'
+tmpbg='$HOME/screen.png'
 
 (( $# )) && { icon=$1; }
 

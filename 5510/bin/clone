@@ -1,10 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env python
+# coding: utf-8
 
-url=$1
-withoutProtocol="${url##*://}"
-withDotGit="${HOME}/dev/src/${withoutProtocol}"
-fullPath=${withDotGit%.*}
 
-mkdir -p $fullPath
-git clone $url $fullPath
-cd $fullPath
+import sys
+import os
+
+from git import Repo
+from urllib.parse import urlparse
+
+# requires:
+# git-url-parse
+# GitPython
+def main():
+    git_url = sys.argv[1]
+
+    parsed = urlparse(git_url)
+    print(parsed)
+    repo_path = parsed.path.rstrip(".git")
+    print(repo_path)
+   # Repo.clone_from(git_url, repo_dir)
+    # os.chdir("/home/name/projects/python")
+    # os.system("pwd")
+    # os.system("/bin/bash")
+
+
+if __name__ == '__main__':
+    main()

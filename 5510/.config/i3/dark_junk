@@ -1,0 +1,52 @@
+## Dark Colors
+
+# Solarized Colors
+
+set $base03     #002b36
+set $base02     #073642
+set $base01     #586e75
+set $base00     #657b83
+set $base0      #839496
+set $base1      #93a1a1
+set $base2      #eee8d5
+set $base3      #fdf6e3
+set $yellow     #b58900
+set $orange     #cb4b16
+set $red        #dc322f
+set $magenta    #d33682
+set $violet     #6c71c4
+set $blue       #268bd2
+set $cyan       #2aa198
+set $green      #859900
+
+# class                 border  backgr.   text    indicator
+# client.focused          #888888 $arcblack #ffffff #fe840e
+# client.focused_inactive #444444 #555a63   #cccccc #48504e
+# client.unfocused        #444444 #1e180f   #888888 #292e2d
+# client.urgent           #dddddd #d00000   #ffffff #900000
+client.placeholder      #000000 #0c0c0c   #ffffff #000000
+client.background       #888888
+
+# Status bar
+bar {
+    status_command i3status -c /home/jeremybr/.config/i3/i3status.conf
+    position bottom
+    font pango:Hack, FontAwesome 14
+    tray_padding 2
+    separator_symbol "  |  "
+    colors {
+        background #002b36
+        statusline #839496
+        separator  #839496
+        focused_workspace  #b58900 #b58900 #002b36
+        active_workspace   #586e75 #586e75 #002b36
+        inactive_workspace #073642 #002b36 #839496
+        urgent_workspace   #dc322f #dc322f #fdf6e3
+    }
+}
+
+# class                 border  background  text    indicator child_border
+client.focused          $blue   #586e75     #fdf6e3 $blue     $blue
+client.focused_inactive #002b36 #073642     #839496 #073642
+client.unfocused        #002b36 #073642     #839496 #073642
+client.urgent           #002b36 #dc322f     #fdf6e3 #002b36

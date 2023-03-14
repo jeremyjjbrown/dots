@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# $HOME/.screenlayout/1Screen.sh
+# xfconf-query -c xsettings -p /Xft/DPI -s 160
+darkside
+dim
+sed -i 's/background $base2/background $base02/g' ~/.config/i3/config
+# sed -i 's/FontAwesome 20/FontAwesome 30/g' ~/.config/i3/config
+i3-msg reload
+sed -i 's/background = #fdf6e3/background = #073642/g' ~/.config/polybar/config.ini
+sed -i 's/background-alt = #eee8d4/background-alt = #002b36/g' ~/.config/polybar/config.ini
+polybar-msg cmd restart
+
+
+
+nitrogen --set-scaled ~/Pictures/SolarizedBurstDarkWalpaper.jpg
+
